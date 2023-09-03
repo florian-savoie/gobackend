@@ -2,7 +2,9 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const Thing = require('./models/thing');
-mongoose.connect('mongodb+srv://florian:florian13@cluster0.3ukakpe.mongodb.net/?retryWrites=true&w=majority',
+const dotenv = require('dotenv');
+dotenv.config();
+mongoose.connect(process.env.MONGO_URI,
   { useNewUrlParser: true,
     useUnifiedTopology: true })
   .then(() => console.log('Connexion à MongoDB réussie !'))
