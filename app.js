@@ -1,9 +1,11 @@
 const express = require('express');
+const path = require('path');
 const app = express();
 const stuffRoutes = require('./routes/stuff');
 const userRoutes = require('./routes/user');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+
 dotenv.config();
 
 
@@ -22,10 +24,9 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
     next();
   });
-
+  app.use('/images', express.static(path.join(__dirname, 'images')));
   app.use('/api/stuff',stuffRoutes);
   app.use('/api/auth',userRoutes);
-  
 
 
 module.exports = app;
